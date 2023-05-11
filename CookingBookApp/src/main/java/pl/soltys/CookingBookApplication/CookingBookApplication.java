@@ -13,12 +13,15 @@ import net.rgielen.fxweaver.spring.SpringFxWeaver;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
+import pl.soltys.CookingBookApplication.service.RecipeService;
 
 @SpringBootApplication
 public class CookingBookApplication {
 
 	public static void main(String[] args) {
 		Application.launch(JavaSpringBootApplication.class, args);
+		var dd = new RecipeService();
+		System.out.println(dd.getRecipesFromApi("chicken soup"));
 	}
 
 	@Bean
