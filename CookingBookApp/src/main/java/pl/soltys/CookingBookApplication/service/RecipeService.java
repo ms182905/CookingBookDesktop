@@ -1,8 +1,11 @@
 package pl.soltys.CookingBookApplication.service;
 
 import com.mashape.unirest.http.Unirest;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import pl.soltys.CookingBookApplication.model.Recipe;
@@ -38,19 +41,46 @@ public class RecipeService {
     }
 
     private Recipe parseJson(JSONObject recipe){
-        var description = "-";
+        return Recipe.builder()
+                .Name(recipe.getString("name"))
+                .API_ID(recipe.getInt("id"))
+                .Description(getDescriptionFromJSON(recipe))
+                .Picture(getImageViewFromUrl(recipe.getString("thumbnail_url")))
+                .build();
+    }
+
+    private ImageView getImageViewFromUrl(String url) {
+        Image image = new Image(url);
+        ImageView imageView = new ImageView();
+
+        if (image.getWidth() > image.getHeight()) {
+            imageView.setFitWidth(200);
+            imageView.setTranslateY((200 - (200 / image.getWidth()) * image.getHeight()) / 2);
+        }
+        else {
+            imageView.setFitHeight(200);
+            imageView.setTranslateX((200 - (200 / image.getHeight()) * image.getWidth()) / 2);
+        }
+
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
+        imageView.setImage(image);
+
+        return imageView;
+    }
+
+    private String getDescriptionFromJSON(JSONObject recipe) {
+        String description = "-";
+
         try {
             description = recipe.getString("description");
+            description = description.replaceAll("<a.*a>", "");
         }
-        catch (Exception e) {
+        catch (JSONException e) {
             log.info("No description for " + recipe.getString("name"));
         }
 
-        return Recipe.builder()
-                .Name(recipe.getString("name"))
-                .Picture(recipe.getString("thumbnail_url"))
-                .API_ID(recipe.getInt("id"))
-                .Description(description)
-                .build();
+        return description;
     }
 }

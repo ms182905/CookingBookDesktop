@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -13,7 +14,6 @@ import pl.soltys.CookingBookApplication.model.Recipe;
 import pl.soltys.CookingBookApplication.service.RecipeService;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -29,7 +29,7 @@ public class MainController {
     @FXML
     public TableView<Recipe> mainTableView = new TableView<>();
     @FXML
-    public TableColumn<Recipe, String> pictureTableColumn = new TableColumn<>("Picture");
+    public TableColumn<Recipe, ImageView> pictureTableColumn = new TableColumn<>("Picture");
     @FXML
     public TableColumn<Recipe, String> nameTableColumn = new TableColumn<>("Name");
     @FXML
@@ -50,12 +50,9 @@ public class MainController {
 
     public void transferData(String phrase) {
         List<Recipe> recipes = recipeService.getRecipesFromApi(phrase, 20);
-        //recipes.add(Recipe.builder().Name("sdf").Description("sdfgsdf").Picture("sdgsdg").build());
-
         ObservableList<Recipe> data = FXCollections.observableList(recipes);
 
         setColumnForTableView(mainTableView);
-        wrapTextForTableColumn(pictureTableColumn);
         wrapTextForTableColumn(nameTableColumn);
         wrapTextForTableColumn(descriptionTableColumn);
 
@@ -66,7 +63,7 @@ public class MainController {
         pictureTableColumn.setCellValueFactory((new PropertyValueFactory<>("Picture")));
         nameTableColumn.setCellValueFactory((new PropertyValueFactory<>("Name")));
         descriptionTableColumn.setCellValueFactory((new PropertyValueFactory<>("Description")));
-        tableView.setFixedCellSize(150);
+        tableView.setFixedCellSize(200);
     }
 
     public static void wrapTextForTableColumn(TableColumn<Recipe, String> tableColumn) {

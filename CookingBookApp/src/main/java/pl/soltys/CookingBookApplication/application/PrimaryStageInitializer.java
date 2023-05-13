@@ -1,6 +1,5 @@
 package pl.soltys.CookingBookApplication.application;
 
-import pl.soltys.CookingBookApplication.CookingBookApplication;
 import pl.soltys.CookingBookApplication.controller.MainController;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
