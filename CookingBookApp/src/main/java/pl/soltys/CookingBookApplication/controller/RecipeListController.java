@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.util.List;
 
 @Component
-@FxmlView
-public class MainController {
+@FxmlView("RecipeListStage.fxml")
+public class RecipeListController {
     private final FxControllerAndView<SomeDialog, VBox> someDialog;
     private RecipeService recipeService = new RecipeService();
 
@@ -35,7 +35,7 @@ public class MainController {
     @FXML
     public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
-    public MainController(FxControllerAndView<SomeDialog, VBox> someDialog) {
+    public RecipeListController(FxControllerAndView<SomeDialog, VBox> someDialog) {
         this.someDialog = someDialog;
     }
 
