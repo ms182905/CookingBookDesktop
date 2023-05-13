@@ -9,5 +9,6 @@ public class Recipe {
     private int ID;
     private int API_ID;
     private String Name;
-    private String Poster;
+    private String Picture;
+    private String Description;
 }

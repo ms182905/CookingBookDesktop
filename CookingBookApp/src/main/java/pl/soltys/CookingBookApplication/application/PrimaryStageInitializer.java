@@ -1,5 +1,6 @@
 package pl.soltys.CookingBookApplication.application;
 
+import pl.soltys.CookingBookApplication.CookingBookApplication;
 import pl.soltys.CookingBookApplication.controller.MainController;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,8 +21,10 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
     @Override
     public void onApplicationEvent(StageReadyEvent event) {
         Stage stage = event.stage;
-        Scene scene = new Scene(fxWeaver.loadView(MainController.class), 400, 300);
+        Scene scene = new Scene(fxWeaver.loadView(MainController.class));
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.setTitle("CookingBookApplication");
         stage.show();
     }
 }

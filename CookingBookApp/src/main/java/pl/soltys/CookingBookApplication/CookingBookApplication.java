@@ -20,8 +20,6 @@ public class CookingBookApplication {
 
 	public static void main(String[] args) {
 		Application.launch(JavaSpringBootApplication.class, args);
-		var dd = new RecipeService();
-		System.out.println(dd.getRecipesFromApi("chicken soup"));
 	}
 
 	@Bean
