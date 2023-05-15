@@ -2,9 +2,9 @@ package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -14,9 +14,7 @@ import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import pl.soltys.CookingBookApplication.model.Recipe;
 import pl.soltys.CookingBookApplication.service.RecipeListService;
-import javafx.scene.control.cell.PropertyValueFactory;
 
-import javafx.scene.input.MouseEvent;
 import java.util.List;
 
 @Component
@@ -24,7 +22,7 @@ import java.util.List;
 @Slf4j
 public class RecipeListController {
     private final FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController;
-    private RecipeListService recipeListService = new RecipeListService();
+    private final RecipeListService recipeListService = new RecipeListService();
 
     @FXML
     public Button button_1;
@@ -46,18 +44,13 @@ public class RecipeListController {
     @FXML
     public void initialize() {
         button_1.setOnAction(
-                actionEvent -> {
-                    transferData(inputTextField.getText());
-                }
+                actionEvent -> transferData(inputTextField.getText())
         );
 
-        mainTableView.setOnMousePressed(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
-                    log.info("Clicked: " + mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
-                    recipeDetailsController.getController().show(mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
-                }
+        mainTableView.setOnMousePressed(event -> {
+            if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                log.info("Clicked: " + mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
+                recipeDetailsController.getController().show(mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
             }
         });
     }

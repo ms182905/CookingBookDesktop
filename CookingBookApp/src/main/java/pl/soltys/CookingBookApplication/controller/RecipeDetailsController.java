@@ -3,18 +3,14 @@ package pl.soltys.CookingBookApplication.controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import pl.soltys.CookingBookApplication.model.RecipeDetails;
 import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
 
 @Controller
@@ -34,7 +30,7 @@ public class RecipeDetailsController {
     private ListView<String> recipeSteps;
     @FXML
     private Label recipeDescriptionLabel;
-    private RecipeDetailsService recipeDetailsService = new RecipeDetailsService();
+    private final RecipeDetailsService recipeDetailsService = new RecipeDetailsService();
 
     @FXML
     public void initialize() {

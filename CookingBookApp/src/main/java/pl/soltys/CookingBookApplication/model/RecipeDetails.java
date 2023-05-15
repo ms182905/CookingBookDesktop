@@ -1,6 +1,5 @@
 package pl.soltys.CookingBookApplication.model;
 
-import javafx.scene.image.ImageView;
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
