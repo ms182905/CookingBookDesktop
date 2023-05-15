@@ -41,6 +41,7 @@ public class RecipeService {
     }
 
     private Recipe parseJson(JSONObject recipe){
+        System.out.println(recipe.getString("name") + " " + recipe.getInt("id"));
         return Recipe.builder()
                 .Name(recipe.getString("name"))
                 .API_ID(recipe.getInt("id"))

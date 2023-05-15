@@ -13,6 +13,7 @@ import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import pl.soltys.CookingBookApplication.model.Recipe;
+import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
 import pl.soltys.CookingBookApplication.service.RecipeService;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -56,7 +57,7 @@ public class RecipeListController {
             public void handle(MouseEvent event) {
                 if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
                     log.info("Clicked: " + mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
-                    recipeDetailsController.getController().show();
+                    recipeDetailsController.getController().show(mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
                 }
             }
         });
