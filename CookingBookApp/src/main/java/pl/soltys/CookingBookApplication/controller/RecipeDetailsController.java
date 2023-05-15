@@ -1,17 +1,22 @@
 package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Controller;
+import pl.soltys.CookingBookApplication.model.Recipe;
 import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
+
+import java.util.List;
 
 @Controller
 @FxmlView("RecipeDetailsStage.fxml")
@@ -34,6 +39,9 @@ public class RecipeDetailsController {
 
     @FXML
     public void initialize() {
+        setCellFactoryForListView(recipeIngredients);
+        setCellFactoryForListView(recipeSteps);
+
         this.stage = new Stage();
         stage.setScene(new Scene(pane_1));
         recipePhoto.setSmooth(true);
@@ -70,5 +78,25 @@ public class RecipeDetailsController {
         }
 
         recipePhoto.setImage(image);
+    }
+
+    public static void setCellFactoryForListView(ListView<String> listView) {
+        listView.setCellFactory(param -> new ListCell<>(){
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item==null) {
+                    setGraphic(null);
+                    setText(null);
+                }
+                else{
+                    setMinWidth(param.getWidth());
+                    setMaxWidth(param.getWidth());
+                    setPrefWidth(param.getWidth());
+                    setWrapText(true);
+                    setText(item);
+                }
+            }
+        });
     }
 }

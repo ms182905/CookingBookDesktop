@@ -14,7 +14,7 @@
             <ImageView fx:id="recipePhoto" fitHeight="340.0" fitWidth="340.0" layoutX="14.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" />
             <ListView fx:id="recipeIngredients" layoutX="372.0" layoutY="160.0" prefHeight="329.0" prefWidth="225.0" />
             <ListView fx:id="recipeSteps" layoutX="609.0" layoutY="160.0" prefHeight="329.0" prefWidth="238.0" />
-            <Label fx:id="recipeDescriptionLabel" layoutX="14.0" layoutY="46.0" prefHeight="79.0" prefWidth="837.0" text="Label" />
+            <Label fx:id="recipeDescriptionLabel" layoutX="14.0" layoutY="46.0" prefHeight="79.0" prefWidth="837.0" text="Label" wrapText="true" />
          </children>
       </AnchorPane>
    </children>

@@ -2,10 +2,12 @@ package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import lombok.extern.slf4j.Slf4j;
@@ -43,10 +45,6 @@ public class RecipeListController {
 
     @FXML
     public void initialize() {
-        button_1.setOnAction(
-                actionEvent -> transferData(inputTextField.getText())
-        );
-
         mainTableView.setOnMousePressed(event -> {
             if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
                 log.info("Clicked: " + mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
@@ -55,15 +53,31 @@ public class RecipeListController {
         });
     }
 
-    public void transferData(String phrase) {
-        List<Recipe> recipes = recipeListService.getRecipesFromApi(phrase, 10);
-        ObservableList<Recipe> data = FXCollections.observableList(recipes);
+    @FXML
+    public void findRecipes() {
+        String phrase = inputTextField.getText();
+
+        Task<List<Recipe>> task = new Task<>() {
+            @Override
+            protected List<Recipe> call() {
+                log.info("Starting getRecipesFromApi");
+                return recipeListService.getRecipesFromApi(phrase, 10);
+            }
+        };
+
+        task.setOnSucceeded(t -> {
+            List<Recipe> recipes = task.getValue();
+            ObservableList<Recipe> data = FXCollections.observableList(recipes);
 
         setColumnForTableView(mainTableView);
         wrapTextForTableColumn(nameTableColumn);
         wrapTextForTableColumn(descriptionTableColumn);
 
         mainTableView.setItems(data);
+        });
+
+        Thread thread = new Thread(task);
+        thread.start();
     }
 
     public void setColumnForTableView(TableView<?> tableView) {

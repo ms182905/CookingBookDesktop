@@ -12,7 +12,7 @@
    <children>
       <AnchorPane prefHeight="657.0" prefWidth="910.0">
          <children>
-            <Button fx:id="button_1" accessibleText="Select" layoutX="11.0" layoutY="94.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="579.0" text="Search" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
+            <Button fx:id="button_1" accessibleText="Select" layoutX="11.0" layoutY="94.0" mnemonicParsing="false" onMouseClicked="#findRecipes" prefHeight="33.0" prefWidth="579.0" text="Search" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
             <TableView fx:id="mainTableView" layoutX="7.0" layoutY="134.0" prefHeight="513.0" prefWidth="880.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="134.0">
               <columns>
                 <TableColumn fx:id="pictureTableColumn" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="Picture" />
