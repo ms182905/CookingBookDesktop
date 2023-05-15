@@ -2,11 +2,13 @@ package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
@@ -14,12 +16,14 @@ import pl.soltys.CookingBookApplication.model.Recipe;
 import pl.soltys.CookingBookApplication.service.RecipeService;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.input.MouseEvent;
 import java.util.List;
 
 @Component
 @FxmlView("RecipeListStage.fxml")
+@Slf4j
 public class RecipeListController {
-    private final FxControllerAndView<SomeDialog, VBox> someDialog;
+    private final FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController;
     private RecipeService recipeService = new RecipeService();
 
     @FXML
@@ -35,8 +39,8 @@ public class RecipeListController {
     @FXML
     public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
-    public RecipeListController(FxControllerAndView<SomeDialog, VBox> someDialog) {
-        this.someDialog = someDialog;
+    public RecipeListController(FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController) {
+        this.recipeDetailsController = recipeDetailsController;
     }
 
     @FXML
@@ -46,6 +50,16 @@ public class RecipeListController {
                     transferData(inputTextField.getText());
                 }
         );
+
+        mainTableView.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if (event.isPrimaryButtonDown() && event.getClickCount() == 2) {
+                    log.info("Clicked: " + mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
+                    recipeDetailsController.getController().show();
+                }
+            }
+        });
     }
 
     public void transferData(String phrase) {
