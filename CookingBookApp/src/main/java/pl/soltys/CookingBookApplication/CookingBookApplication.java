@@ -13,7 +13,6 @@ import net.rgielen.fxweaver.spring.SpringFxWeaver;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
-import pl.soltys.CookingBookApplication.service.RecipeService;
 
 @SpringBootApplication
 public class CookingBookApplication {

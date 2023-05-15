@@ -13,8 +13,7 @@ import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxmlView;
 import org.springframework.stereotype.Component;
 import pl.soltys.CookingBookApplication.model.Recipe;
-import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
-import pl.soltys.CookingBookApplication.service.RecipeService;
+import pl.soltys.CookingBookApplication.service.RecipeListService;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javafx.scene.input.MouseEvent;
@@ -25,7 +24,7 @@ import java.util.List;
 @Slf4j
 public class RecipeListController {
     private final FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController;
-    private RecipeService recipeService = new RecipeService();
+    private RecipeListService recipeListService = new RecipeListService();
 
     @FXML
     public Button button_1;
@@ -64,7 +63,7 @@ public class RecipeListController {
     }
 
     public void transferData(String phrase) {
-        List<Recipe> recipes = recipeService.getRecipesFromApi(phrase, 20);
+        List<Recipe> recipes = recipeListService.getRecipesFromApi(phrase, 10);
         ObservableList<Recipe> data = FXCollections.observableList(recipes);
 
         setColumnForTableView(mainTableView);

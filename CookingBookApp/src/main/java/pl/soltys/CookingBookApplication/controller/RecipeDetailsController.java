@@ -50,8 +50,10 @@ public class RecipeDetailsController {
         stage.show();
     }
 
+
     private void displayData(int API_ID) {
-        RecipeDetails recipeDetails = recipeDetailsService.getRecipeDetailsFromApi(API_ID);
+        var recipeDetails = recipeDetailsService.getRecipeDetailsFromApi(API_ID);
+
         recipeTitleLabel.setText(recipeDetails.getName());
         recipeDescriptionLabel.setText(recipeDetails.getDescription());
         setImageViewFromUrl(recipeDetails.getPictureLink());

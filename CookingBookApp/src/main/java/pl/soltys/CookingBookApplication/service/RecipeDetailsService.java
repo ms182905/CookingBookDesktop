@@ -54,7 +54,7 @@ public class RecipeDetailsService {
         return description;
     }
 
-    private ArrayList<String> getIngredientsFromJSON(JSONObject recipe) {
+    private List<String> getIngredientsFromJSON(JSONObject recipe) {
         var result = new ArrayList<String>();
         JSONArray sections = recipe.getJSONArray("sections");
 
@@ -71,7 +71,7 @@ public class RecipeDetailsService {
         return result;
     }
 
-    private ArrayList<String> getInstructionsFromJSONObject (JSONObject recipe) {
+    private List<String> getInstructionsFromJSONObject (JSONObject recipe) {
         var result = new ArrayList<String>();
         JSONArray instructions = recipe.getJSONArray("instructions");
 

@@ -5,6 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import java.util.*;
 
 @Slf4j
 @Service
-public class RecipeService {
+public class RecipeListService {
     private final String API_URL = "https://tasty.p.rapidapi.com";
     private final String API_KEY = "40faa789d4mshbc3b0eb07e98efap1429f8jsn889b682016c1";
 
@@ -35,9 +36,27 @@ public class RecipeService {
         }
 
         var results = new ArrayList<Recipe>();
-        response.getObject().getJSONArray("results").forEach(json -> results.add(parseJson((JSONObject)json)));
+        response.getObject().getJSONArray("results").forEach(json -> results.addAll(resolveResponse((JSONObject)json)));
 
         return results;
+    }
+
+    private List<Recipe> resolveResponse(JSONObject json) {
+        ArrayList<Recipe> result = new ArrayList<>();
+
+        if(json.has("recipes")) {
+            log.info("Many recipes for: " + json.getInt("id"));
+            JSONArray recipes = json.getJSONArray("recipes");
+
+            for (int i = 0; i < recipes.length(); i++) {
+                result.add(parseJson(recipes.getJSONObject(i)));
+            }
+        }
+        else {
+            result.add(parseJson(json));
+        }
+
+        return result;
     }
 
     private Recipe parseJson(JSONObject recipe){
