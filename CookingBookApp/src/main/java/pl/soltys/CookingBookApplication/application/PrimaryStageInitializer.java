@@ -3,10 +3,12 @@ package pl.soltys.CookingBookApplication.application;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import net.rgielen.fxweaver.core.FxWeaver;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
+
+import net.rgielen.fxweaver.core.FxWeaver;
 import pl.soltys.CookingBookApplication.controller.RecipeListController;
 
 @Component

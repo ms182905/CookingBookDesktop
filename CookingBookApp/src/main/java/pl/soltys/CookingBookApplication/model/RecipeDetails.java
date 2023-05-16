@@ -2,6 +2,7 @@
 package pl.soltys.CookingBookApplication.model;
 
 import java.util.List;
+
 import lombok.Data;
 import lombok.experimental.SuperBuilder;
 

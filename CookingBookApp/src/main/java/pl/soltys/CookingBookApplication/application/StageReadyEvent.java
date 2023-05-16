@@ -2,6 +2,7 @@
 package pl.soltys.CookingBookApplication.application;
 
 import javafx.stage.Stage;
+
 import org.springframework.context.ApplicationEvent;
 
 public class StageReadyEvent extends ApplicationEvent {

@@ -9,11 +9,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import pl.soltys.CookingBookApplication.model.RecipeDBModel;
 import pl.soltys.CookingBookApplication.model.RecipeDetails;
 import pl.soltys.CookingBookApplication.service.FavouriteRecipeService;
@@ -40,8 +42,6 @@ public class RecipeDetailsController {
 
   @FXML
   public void initialize() {
-
-
     setCellFactoryForListView(recipeIngredients);
     setCellFactoryForListView(recipeSteps);
 

@@ -1,14 +1,17 @@
 /* (C)2023 */
 package pl.soltys.CookingBookApplication.service;
 
-import com.mashape.unirest.http.Unirest;
 import java.util.*;
-import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+
+import com.mashape.unirest.http.Unirest;
+
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import pl.soltys.CookingBookApplication.model.RecipeDetails;
 
 @Slf4j

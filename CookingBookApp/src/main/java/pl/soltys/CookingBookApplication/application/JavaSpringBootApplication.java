@@ -4,8 +4,10 @@ package pl.soltys.CookingBookApplication.application;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+
 import pl.soltys.CookingBookApplication.CookingBookApplication;
 
 public class JavaSpringBootApplication extends Application {

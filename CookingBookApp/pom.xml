@@ -151,39 +151,36 @@
 				<artifactId>spotless-maven-plugin</artifactId>
 				<version>2.36.0</version>
 				<configuration>
-					<!-- optional: limit format enforcement to just the files changed by this feature branch -->
-					<ratchetFrom>origin/main</ratchetFrom>
-					<formats>
-						<!-- you can define as many formats as you want, each is independent -->
-						<format>
-							<!-- define the files to apply to -->
-							<includes>
-								<include>*.md</include>
-								<include>.gitignore</include>
-							</includes>
-							<!-- define the steps to apply to those files -->
-							<trimTrailingWhitespace/>
-							<endWithNewline/>
-<!--							<indent>-->
-<!--								<tabs>true</tabs>-->
-<!--								<spacesPerTab>4</spacesPerTab>-->
-<!--							</indent>-->
-						</format>
-					</formats>
-					<!-- define a language-specific format -->
 					<java>
-						<!-- no need to specify files, inferred automatically, but you can if you want -->
+						<!-- These are the defaults, you can override if you want -->
+						<includes>
+							<include>src/main/java/**/*.java</include>
+							<include>src/test/java/**/*.java</include>
+						</includes>
 
-						<!-- apply a specific flavor of google-java-format and reflow long strings -->
+						<!-- Cleanthat will refactor your code, but it may break your style: apply it before your formatter -->
+
 						<googleJavaFormat>
-							<version>1.10.0</version>
-							<style>GOOGLE</style>
-							<reflowLongStrings>true</reflowLongStrings>
+							<version>1.10.0</version>                      <!-- optional, 1.8 is minimum supported version -->
+							<style>GOOGLE</style>                       <!-- or AOSP (optional) -->
+							<reflowLongStrings>true</reflowLongStrings> <!-- optional -->
+<!--							&lt;!&ndash; optional: custom group artifact (you probably don't need this) &ndash;&gt;-->
+<!--							<groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>-->
 						</googleJavaFormat>
 
-						<!-- make sure every file has the following copyright header.
-                          optionally, Spotless can set copyright years by digging
-                          through git history (see "license" section below) -->
+						<importOrder /> <!-- standard import order -->
+						<importOrder>  <!-- or a custom ordering -->
+							<wildcardsLast>false</wildcardsLast> <!-- Optional, default false. Sort wildcard import after specific imports -->
+							<order>java|javax,org,com,com.diffplug,,\#com.diffplug,\#</order>  <!-- or use <file>${project.basedir}/eclipse.importorder</file> -->
+							<!-- you can use an empty string for all the imports you didn't specify explicitly, '|' to join group without blank line, and '\#` prefix for static imports. -->
+						</importOrder>
+
+						<removeUnusedImports>
+							<engine>google-java-format</engine>    <!-- optional. Defaults to `google-java-format`. Can be switched to `cleanthat-javaparser-unnecessaryimport` (e.g. to process JDK17 source files with a JDK8+ Runtime) -->
+						</removeUnusedImports>
+
+						<formatAnnotations />  <!-- fixes formatting of type annotations, see below -->
+
 						<licenseHeader>
 							<content>/* (C)$YEAR */</content>  <!-- or <file>${project.basedir}/license-header</file> -->
 						</licenseHeader>

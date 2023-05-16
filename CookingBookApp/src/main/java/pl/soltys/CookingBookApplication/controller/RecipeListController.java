@@ -11,10 +11,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
+import org.springframework.stereotype.Component;
+
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxControllerAndView;
 import net.rgielen.fxweaver.core.FxmlView;
-import org.springframework.stereotype.Component;
 import pl.soltys.CookingBookApplication.model.Recipe;
 import pl.soltys.CookingBookApplication.service.RecipeListService;
 
@@ -28,12 +30,12 @@ public class RecipeListController {
   private final RecipeListService recipeListService = new RecipeListService();
 
   @FXML public Button button_1;
-  @FXML
-  public Button favouriteButton;
+  @FXML public Button favouriteButton;
   @FXML public TextField inputTextField;
   @FXML public TableView<Recipe> mainTableView = new TableView<>();
   @FXML public TableColumn<Recipe, ImageView> pictureTableColumn = new TableColumn<>("Picture");
   @FXML public TableColumn<Recipe, String> nameTableColumn = new TableColumn<>("Name");
+
   @FXML
   public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
@@ -56,9 +58,10 @@ public class RecipeListController {
           }
         });
 
-    favouriteButton.setOnMouseClicked(event -> {
-        favouriteRecipeListController.getController().show();
-    });
+    favouriteButton.setOnMouseClicked(
+        event -> {
+          favouriteRecipeListController.getController().show();
+        });
   }
 
   @FXML
