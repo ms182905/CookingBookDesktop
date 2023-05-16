@@ -40,6 +40,8 @@ public class RecipeDetailsController {
 
   @FXML
   public void initialize() {
+
+
     setCellFactoryForListView(recipeIngredients);
     setCellFactoryForListView(recipeSteps);
 
@@ -122,5 +124,9 @@ public class RecipeDetailsController {
       favouriteRecipeService.add(recipeDBModel);
       addToFavouritesButton.setText("Remove from favourites");
     }
+  }
+
+  public Stage getStage() {
+    return this.stage;
   }
 }

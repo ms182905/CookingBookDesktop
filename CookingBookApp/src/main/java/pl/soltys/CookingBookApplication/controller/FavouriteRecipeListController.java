@@ -4,6 +4,7 @@ package pl.soltys.CookingBookApplication.controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxControllerAndView;
@@ -53,8 +55,16 @@ public class FavouriteRecipeListController {
                         recipeDetailsController
                                 .getController()
                                 .show(mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
-                    }
-                });
+
+                        recipeDetailsController.getController().getStage().setOnCloseRequest(new EventHandler<WindowEvent>() {
+                            public void handle(WindowEvent we) {
+                                getRecipesFromDb();
+                            }
+
+
+                    });
+                }
+                    });
 
 
 
