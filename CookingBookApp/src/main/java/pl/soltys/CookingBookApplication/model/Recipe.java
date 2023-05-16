@@ -7,8 +7,8 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 public class Recipe {
-    private int API_ID;
-    private String Name;
-    private String Description;
-    private ImageView Picture;
+  private int API_ID;
+  private String Name;
+  private String Description;
+  private ImageView Picture;
 }

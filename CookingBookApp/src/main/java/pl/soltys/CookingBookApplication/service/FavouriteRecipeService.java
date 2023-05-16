@@ -1,9 +1,9 @@
 package pl.soltys.CookingBookApplication.service;
 
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ReflectionUtils;
 import pl.soltys.CookingBookApplication.model.RecipeDBModel;
 import pl.soltys.CookingBookApplication.repository.FavouriteRecipeRepository;
 
@@ -12,17 +12,21 @@ import pl.soltys.CookingBookApplication.repository.FavouriteRecipeRepository;
 @Slf4j
 public class FavouriteRecipeService {
 
-    private final FavouriteRecipeRepository favouriteRecipeRepository;
+  private final FavouriteRecipeRepository favouriteRecipeRepository;
 
-    public void add(RecipeDBModel recipe) {
-        favouriteRecipeRepository.save(recipe);
-    }
+  public void add(RecipeDBModel recipe) {
+    favouriteRecipeRepository.save(recipe);
+  }
 
-    public boolean contains(int API_ID) {
-        return favouriteRecipeRepository.existsById(API_ID);
-    }
+  public boolean contains(int API_ID) {
+    return favouriteRecipeRepository.existsById(API_ID);
+  }
 
-    public void delete(int API_ID) {
-        favouriteRecipeRepository.deleteById(API_ID);
-    }
+  public void delete(int API_ID) {
+    favouriteRecipeRepository.deleteById(API_ID);
+  }
+
+  public List<RecipeDBModel> getAll() {
+    return favouriteRecipeRepository.findAll();
+  }
 }

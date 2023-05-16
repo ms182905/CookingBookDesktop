@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository;
 import pl.soltys.CookingBookApplication.model.RecipeDBModel;
 
 @Repository
-public interface FavouriteRecipeRepository extends JpaRepository<RecipeDBModel, Integer> {
-}
+public interface FavouriteRecipeRepository extends JpaRepository<RecipeDBModel, Integer> {}

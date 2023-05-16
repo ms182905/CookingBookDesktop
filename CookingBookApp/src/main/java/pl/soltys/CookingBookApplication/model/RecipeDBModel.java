@@ -12,15 +12,18 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="recipe")
+@Table(name = "recipe")
 public class RecipeDBModel {
-    @Id
-    @Column(name = "API_ID")
-    private Integer API_ID;
-    @Column(name = "Name")
-    private String Name;
-    @Column(name = "Description")
-    private String Description;
-    @Column(name = "PictureURL")
-    private String PictureURL;
+  @Id
+  @Column(name = "API_ID")
+  private Integer API_ID;
+
+  @Column(name = "Name")
+  private String Name;
+
+  @Column(name = "Description")
+  private String Description;
+
+  @Column(name = "PictureURL")
+  private String PictureURL;
 }
