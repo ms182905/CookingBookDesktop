@@ -1,3 +1,4 @@
+/* (C)2023 */
 package pl.soltys.CookingBookApplication;
 
 import javafx.application.Application;

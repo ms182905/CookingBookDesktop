@@ -1,3 +1,4 @@
+/* (C)2023 */
 package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
@@ -115,7 +116,7 @@ public class RecipeDetailsController {
       var recipeDBModel =
           new RecipeDBModel(
               recipeDetails.getAPI_ID(),
-                recipeDetails.getName(),
+              recipeDetails.getName(),
               recipeDetails.getDescription(),
               recipeDetails.getPictureURL());
       favouriteRecipeService.add(recipeDBModel);

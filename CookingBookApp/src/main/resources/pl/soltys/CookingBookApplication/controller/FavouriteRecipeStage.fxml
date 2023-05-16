@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="pane_1" prefHeight="657.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.soltys.CookingBookApplication.controller.FavouriteRecipeListController">
+   <children>
+      <AnchorPane prefHeight="657.0" prefWidth="910.0">
+         <children>
+            <TableView fx:id="mainTableView" layoutX="7.0" layoutY="62.0" prefHeight="585.0" prefWidth="890.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+              <columns>
+                <TableColumn fx:id="pictureTableColumn" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="Picture" />
+                <TableColumn fx:id="nameTableColumn" editable="false" prefWidth="205.0" resizable="false" sortable="false" text="Name" />
+                  <TableColumn fx:id="descriptionTableColumn" editable="false" prefWidth="473.0" resizable="false" sortable="false" text="Description" />
+              </columns>
+            </TableView>
+            <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="890.0" text="Favourite recipes" textAlignment="CENTER" />
+         </children>
+         <opaqueInsets>
+            <Insets bottom="5.0" left="5.0" right="5.0" />
+         </opaqueInsets>
+      </AnchorPane>
+   </children>
+</Pane>

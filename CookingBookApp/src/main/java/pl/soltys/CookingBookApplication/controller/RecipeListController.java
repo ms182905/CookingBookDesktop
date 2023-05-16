@@ -1,3 +1,4 @@
+/* (C)2023 */
 package pl.soltys.CookingBookApplication.controller;
 
 import java.util.List;
@@ -22,9 +23,13 @@ import pl.soltys.CookingBookApplication.service.RecipeListService;
 @Slf4j
 public class RecipeListController {
   private final FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController;
+  private final FxControllerAndView<FavouriteRecipeListController, VBox>
+      favouriteRecipeListController;
   private final RecipeListService recipeListService = new RecipeListService();
 
   @FXML public Button button_1;
+  @FXML
+  public Button favouriteButton;
   @FXML public TextField inputTextField;
   @FXML public TableView<Recipe> mainTableView = new TableView<>();
   @FXML public TableColumn<Recipe, ImageView> pictureTableColumn = new TableColumn<>("Picture");
@@ -34,8 +39,10 @@ public class RecipeListController {
   public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
   public RecipeListController(
-      FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController) {
+      FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController,
+      FxControllerAndView<FavouriteRecipeListController, VBox> favouriteRecipeListController) {
     this.recipeDetailsController = recipeDetailsController;
+    this.favouriteRecipeListController = favouriteRecipeListController;
   }
 
   @FXML
@@ -49,6 +56,10 @@ public class RecipeListController {
                 .show(mainTableView.getSelectionModel().getSelectedItem().getAPI_ID());
           }
         });
+
+    favouriteButton.setOnMouseClicked(event -> {
+        favouriteRecipeListController.getController().show();
+    });
   }
 
   @FXML

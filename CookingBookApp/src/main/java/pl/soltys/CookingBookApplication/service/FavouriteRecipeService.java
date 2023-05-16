@@ -1,3 +1,4 @@
+/* (C)2023 */
 package pl.soltys.CookingBookApplication.service;
 
 import java.util.List;

@@ -20,7 +20,7 @@
                   <TableColumn fx:id="descriptionTableColumn" editable="false" prefWidth="473.0" resizable="false" sortable="false" text="Description" />
               </columns>
             </TableView>
-            <Button layoutX="11.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="579.0" text="Favourites" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="51.0" />
+            <Button fx:id="favouriteButton" layoutX="11.0" layoutY="51.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="579.0" text="Favourites" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="51.0" />
             <TextField fx:id="inputTextField" layoutX="14.0" layoutY="14.0" promptText="Enter what You want to search..." AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
          <opaqueInsets>

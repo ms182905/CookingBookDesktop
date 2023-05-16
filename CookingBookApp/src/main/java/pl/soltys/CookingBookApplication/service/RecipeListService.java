@@ -1,3 +1,4 @@
+/* (C)2023 */
 package pl.soltys.CookingBookApplication.service;
 
 import com.mashape.unirest.http.Unirest;
