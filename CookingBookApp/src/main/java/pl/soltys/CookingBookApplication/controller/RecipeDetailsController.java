@@ -1,24 +1,28 @@
 package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import pl.soltys.CookingBookApplication.model.Recipe;
+import pl.soltys.CookingBookApplication.model.RecipeDBModel;
+import pl.soltys.CookingBookApplication.model.RecipeDetails;
+import pl.soltys.CookingBookApplication.repository.FavouriteRecipeRepository;
+import pl.soltys.CookingBookApplication.service.FavouriteRecipeService;
 import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
 
-import java.util.List;
-
 @Controller
+@Component
+@RequiredArgsConstructor
+@Slf4j
 @FxmlView("RecipeDetailsStage.fxml")
 public class RecipeDetailsController {
     private Stage stage;
@@ -35,7 +39,11 @@ public class RecipeDetailsController {
     private ListView<String> recipeSteps;
     @FXML
     private Label recipeDescriptionLabel;
-    private final RecipeDetailsService recipeDetailsService = new RecipeDetailsService();
+    @FXML
+    private Button addToFavouritesButton;
+    private final RecipeDetailsService recipeDetailsService;
+    private final FavouriteRecipeService favouriteRecipeService;
+    private RecipeDetails recipeDetails;
 
     @FXML
     public void initialize() {
@@ -56,11 +64,11 @@ public class RecipeDetailsController {
 
 
     private void displayData(int API_ID) {
-        var recipeDetails = recipeDetailsService.getRecipeDetailsFromApi(API_ID);
+        recipeDetails = recipeDetailsService.getRecipeDetailsFromApi(API_ID);
 
         recipeTitleLabel.setText(recipeDetails.getName());
         recipeDescriptionLabel.setText(recipeDetails.getDescription());
-        setImageViewFromUrl(recipeDetails.getPictureLink());
+        setImageViewFromUrl(recipeDetails.getPictureURL());
         recipeIngredients.setItems(FXCollections.observableList(recipeDetails.getIngredients()));
         recipeSteps.setItems(FXCollections.observableList(recipeDetails.getInstructions()));
     }
@@ -98,5 +106,13 @@ public class RecipeDetailsController {
                 }
             }
         });
+    }
+
+    @FXML
+    public void addToFavourites() {
+        log.info("Adding to repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
+        var recipeDBModel = new RecipeDBModel(recipeDetails.getAPI_ID(), recipeDetails.getName(),
+                recipeDetails.getDescription(), recipeDetails.getPictureURL());
+        favouriteRecipeService.add(recipeDBModel);
     }
 }

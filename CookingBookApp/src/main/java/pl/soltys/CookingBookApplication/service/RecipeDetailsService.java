@@ -34,7 +34,7 @@ public class RecipeDetailsService {
                 .Name(recipe.getString("name"))
                 .API_ID(recipe.getInt("id"))
                 .Description(getDescriptionFromJSON(recipe))
-                .PictureLink(recipe.getString("thumbnail_url"))
+                .PictureURL(recipe.getString("thumbnail_url"))
                 .Ingredients(getIngredientsFromJSON(recipe))
                 .Instructions(getInstructionsFromJSONObject(recipe))
                 .build();

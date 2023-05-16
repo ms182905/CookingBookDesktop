@@ -12,7 +12,7 @@ public class RecipeDetails {
     private String Name;
     private List<String> Ingredients;
     private List<String> Instructions;
-    private String PictureLink;
+    private String PictureURL;
     private String Description;
 
     @Override
@@ -22,7 +22,7 @@ public class RecipeDetails {
                 ", Name='" + Name + '\'' +
                 ", Ingredients=" + Ingredients +
                 ", Instructions=" + Instructions +
-                ", PictureLink='" + PictureLink + '\'' +
+                ", PictureURL='" + PictureURL + '\'' +
                 ", Description='" + Description + '\'' +
                 '}';
     }
