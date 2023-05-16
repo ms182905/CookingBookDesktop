@@ -34,7 +34,6 @@ public class RecipeListController {
   @FXML public TableView<Recipe> mainTableView = new TableView<>();
   @FXML public TableColumn<Recipe, ImageView> pictureTableColumn = new TableColumn<>("Picture");
   @FXML public TableColumn<Recipe, String> nameTableColumn = new TableColumn<>("Name");
-
   @FXML
   public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
