@@ -58,6 +58,9 @@ public class RecipeDetailsController {
     }
 
     public void show(int API_ID) {
+        addToFavouritesButton.setText(favouriteRecipeService.contains(API_ID)?
+                "Remove from favourites" : "Add to favourites");
+
         displayData(API_ID);
         stage.show();
     }
@@ -109,10 +112,18 @@ public class RecipeDetailsController {
     }
 
     @FXML
-    public void addToFavourites() {
-        log.info("Adding to repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
-        var recipeDBModel = new RecipeDBModel(recipeDetails.getAPI_ID(), recipeDetails.getName(),
-                recipeDetails.getDescription(), recipeDetails.getPictureURL());
-        favouriteRecipeService.add(recipeDBModel);
+    public void addToFavourites() { // name refactor
+        if (favouriteRecipeService.contains(recipeDetails.getAPI_ID())) {
+            log.info("Removing from repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
+            favouriteRecipeService.delete(recipeDetails.getAPI_ID());
+            addToFavouritesButton.setText("Add to favourites");
+        }
+        else {
+            log.info("Adding to repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
+            var recipeDBModel = new RecipeDBModel(recipeDetails.getAPI_ID(), recipeDetails.getName(),
+                    recipeDetails.getDescription(), recipeDetails.getPictureURL());
+            favouriteRecipeService.add(recipeDBModel);
+            addToFavouritesButton.setText("Remove from favourites");
+        }
     }
 }

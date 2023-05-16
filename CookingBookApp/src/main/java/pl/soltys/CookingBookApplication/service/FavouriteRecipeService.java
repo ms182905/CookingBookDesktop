@@ -17,4 +17,12 @@ public class FavouriteRecipeService {
     public void add(RecipeDBModel recipe) {
         favouriteRecipeRepository.save(recipe);
     }
+
+    public boolean contains(int API_ID) {
+        return favouriteRecipeRepository.existsById(API_ID);
+    }
+
+    public void delete(int API_ID) {
+        favouriteRecipeRepository.deleteById(API_ID);
+    }
 }
