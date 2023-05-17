@@ -2,6 +2,8 @@
 package pl.soltys.CookingBookApplication.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,6 +48,8 @@ public class FavouriteRecipeListController {
   @FXML
   public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
+  @FXML public ProgressIndicator progressIndicator;
+
   private final FavouriteRecipeService favouriteRecipeService;
 
   @FXML
@@ -81,27 +85,31 @@ public class FavouriteRecipeListController {
 
   @FXML
   public void getRecipesFromDb() {
+    progressIndicator.setVisible(true);
 
-    Task<List<RecipeDBModel>> task =
+    Task<ObservableList<Recipe>> task =
         new Task<>() {
           @Override
-          protected List<RecipeDBModel> call() {
+          protected ObservableList<Recipe> call() {
+
             log.info("Starting getRecipesFromDb");
-            return favouriteRecipeService.getAll();
+            mainTableView.getItems().clear();
+            List<RecipeDBModel> recipes = favouriteRecipeService.getAll();
+            List<Recipe> convertedRecipes = convertRecipeDBModelToRecipe(recipes);
+            ObservableList<Recipe> data = FXCollections.observableList(convertedRecipes);
+
+            setColumnForTableView(mainTableView);
+            wrapTextForTableColumn(nameTableColumn);
+            wrapTextForTableColumn(descriptionTableColumn);
+
+            return data;
           }
         };
 
     task.setOnSucceeded(
         t -> {
-          List<RecipeDBModel> recipes = task.getValue();
-          List<Recipe> convertedRecipes = convertRecipeDBModelToRecipe(recipes);
-          ObservableList<Recipe> data = FXCollections.observableList(convertedRecipes);
-
-          setColumnForTableView(mainTableView);
-          wrapTextForTableColumn(nameTableColumn);
-          wrapTextForTableColumn(descriptionTableColumn);
-
-          mainTableView.setItems(data);
+          progressIndicator.setVisible(false);
+          mainTableView.setItems(task.getValue());
         });
 
     Thread thread = new Thread(task);

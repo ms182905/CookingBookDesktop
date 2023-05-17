@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import org.springframework.stereotype.Component;
@@ -124,6 +125,18 @@ public class RecipeDetailsController {
       favouriteRecipeService.add(recipeDBModel);
       addToFavouritesButton.setText("Remove from favourites");
     }
+  }
+
+  public static void wrapTextForListView(ListView<String> listView) {
+    listView.setCellFactory(
+        tc -> {
+          ListCell<String> cell = new ListCell<>();
+          Text text = new Text();
+          cell.setGraphic(text);
+          text.wrappingWidthProperty().bind(listView.widthProperty());
+          text.textProperty().bind(cell.itemProperty());
+          return cell;
+        });
   }
 
   public Stage getStage() {

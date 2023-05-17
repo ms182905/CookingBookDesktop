@@ -39,6 +39,8 @@ public class RecipeListController {
   @FXML
   public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
 
+  @FXML public ProgressIndicator progressIndicator;
+
   public RecipeListController(
       FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController,
       FxControllerAndView<FavouriteRecipeListController, VBox> favouriteRecipeListController) {
@@ -66,6 +68,7 @@ public class RecipeListController {
 
   @FXML
   public void findRecipes() {
+    progressIndicator.setVisible(true);
     String phrase = inputTextField.getText();
 
     Task<List<Recipe>> task =
@@ -73,7 +76,7 @@ public class RecipeListController {
           @Override
           protected List<Recipe> call() {
             log.info("Starting getRecipesFromApi");
-            return recipeListService.getRecipesFromApi(phrase, 10);
+            return recipeListService.getRecipeListFromApi(phrase, 10);
           }
         };
 
@@ -86,6 +89,7 @@ public class RecipeListController {
           wrapTextForTableColumn(nameTableColumn);
           wrapTextForTableColumn(descriptionTableColumn);
 
+          progressIndicator.setVisible(false);
           mainTableView.setItems(data);
         });
 

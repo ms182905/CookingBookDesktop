@@ -23,7 +23,7 @@ public class RecipeListService {
   private final String API_KEY = "40faa789d4mshbc3b0eb07e98efap1429f8jsn889b682016c1";
 
   @SneakyThrows
-  public List<Recipe> getRecipesFromApi(String phrase, int number) {
+  public List<Recipe> getRecipeListFromApi(String phrase, int number) {
     phrase = phrase.replaceAll(" ", "+");
 
     var URL = API_URL + "/recipes/list?from=0&size=" + number + "&q=" + phrase;
@@ -39,13 +39,13 @@ public class RecipeListService {
       return Collections.emptyList();
     }
 
-    var results = new ArrayList<Recipe>();
+    var result = new ArrayList<Recipe>();
     response
         .getObject()
         .getJSONArray("results")
-        .forEach(json -> results.addAll(resolveResponse((JSONObject) json)));
+        .forEach(json -> result.addAll(resolveResponse((JSONObject) json)));
 
-    return results;
+    return result;
   }
 
   private List<Recipe> resolveResponse(JSONObject json) {
