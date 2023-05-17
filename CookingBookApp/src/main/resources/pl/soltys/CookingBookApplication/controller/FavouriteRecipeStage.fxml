@@ -7,15 +7,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="pane_1" prefHeight="657.0" prefWidth="910.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.soltys.CookingBookApplication.controller.FavouriteRecipeListController">
+<Pane fx:id="pane_1" prefHeight="657.0" prefWidth="910.0" stylesheets="@../../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.soltys.CookingBookApplication.controller.FavouriteRecipeListController">
    <children>
       <AnchorPane prefHeight="657.0" prefWidth="910.0">
          <children>
-            <TableView fx:id="mainTableView" layoutX="7.0" layoutY="62.0" prefHeight="585.0" prefWidth="890.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
+            <TableView fx:id="mainTableView" layoutX="7.0" layoutY="62.0" prefHeight="585.0" prefWidth="890.0" stylesheets="@../../../../assets/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="62.0">
               <columns>
                 <TableColumn fx:id="pictureTableColumn" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="Picture" />
                 <TableColumn fx:id="nameTableColumn" editable="false" prefWidth="205.0" resizable="false" sortable="false" text="Name" />
-                  <TableColumn fx:id="descriptionTableColumn" editable="false" prefWidth="473.0" resizable="false" sortable="false" text="Description" />
+                  <TableColumn fx:id="descriptionTableColumn" editable="false" prefWidth="484.0" resizable="false" sortable="false" text="Description" />
               </columns>
             </TableView>
             <Label fx:id="recipeNameLabel" layoutX="14.0" layoutY="14.0" prefHeight="35.0" prefWidth="890.0" text="Favourite recipes" textAlignment="CENTER" />

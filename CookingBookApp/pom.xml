@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.0.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>CookingBookApp</artifactId>
@@ -152,37 +152,32 @@
 				<version>2.36.0</version>
 				<configuration>
 					<java>
-						<!-- These are the defaults, you can override if you want -->
 						<includes>
 							<include>src/main/java/**/*.java</include>
 							<include>src/test/java/**/*.java</include>
 						</includes>
 
-						<!-- Cleanthat will refactor your code, but it may break your style: apply it before your formatter -->
-
 						<googleJavaFormat>
-							<version>1.10.0</version>                      <!-- optional, 1.8 is minimum supported version -->
-							<style>GOOGLE</style>                       <!-- or AOSP (optional) -->
-							<reflowLongStrings>true</reflowLongStrings> <!-- optional -->
-<!--							&lt;!&ndash; optional: custom group artifact (you probably don't need this) &ndash;&gt;-->
-<!--							<groupArtifact>com.google.googlejavaformat:google-java-format</groupArtifact>-->
+							<version>1.10.0</version>
+							<style>GOOGLE</style>
+							<reflowLongStrings>true</reflowLongStrings>
 						</googleJavaFormat>
 
-						<importOrder /> <!-- standard import order -->
-						<importOrder>  <!-- or a custom ordering -->
-							<wildcardsLast>false</wildcardsLast> <!-- Optional, default false. Sort wildcard import after specific imports -->
-							<order>java|javax,org,com,com.diffplug,,\#com.diffplug,\#</order>  <!-- or use <file>${project.basedir}/eclipse.importorder</file> -->
-							<!-- you can use an empty string for all the imports you didn't specify explicitly, '|' to join group without blank line, and '\#` prefix for static imports. -->
+						<importOrder />
+						<importOrder>
+							<wildcardsLast>false</wildcardsLast>
+							<order>java|javax,org,com,com.diffplug,,\#com.diffplug,\#</order>
+
 						</importOrder>
 
 						<removeUnusedImports>
-							<engine>google-java-format</engine>    <!-- optional. Defaults to `google-java-format`. Can be switched to `cleanthat-javaparser-unnecessaryimport` (e.g. to process JDK17 source files with a JDK8+ Runtime) -->
+							<engine>google-java-format</engine>
 						</removeUnusedImports>
 
-						<formatAnnotations />  <!-- fixes formatting of type annotations, see below -->
+						<formatAnnotations />
 
 						<licenseHeader>
-							<content>/* (C)$YEAR */</content>  <!-- or <file>${project.basedir}/license-header</file> -->
+							<content>/* (C)$YEAR */</content>
 						</licenseHeader>
 					</java>
 				</configuration>
