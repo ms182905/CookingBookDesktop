@@ -2,6 +2,7 @@
 package pl.soltys.CookingBookApplication.controller;
 
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,12 +13,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
-import org.springframework.stereotype.Controller;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.rgielen.fxweaver.core.FxmlView;
+import org.springframework.stereotype.Controller;
 import pl.soltys.CookingBookApplication.model.RecipeDBModel;
 import pl.soltys.CookingBookApplication.model.RecipeDetails;
 import pl.soltys.CookingBookApplication.service.FavouriteRecipeService;
@@ -59,8 +58,20 @@ public class RecipeDetailsController {
     addToFavouritesButton.setText(
         favouriteRecipeService.contains(API_ID) ? "Remove from favourites" : "Add to favourites");
 
-    displayData(API_ID);
-    mainStage.show();
+    Task<Void> task =
+            new Task<>() {
+              @Override
+              protected Void call() {
+                displayData(API_ID);
+                return null;
+              }
+            };
+
+    task.setOnSucceeded(
+            t -> mainStage.show());
+
+    Thread thread = new Thread(task);
+    thread.start();
   }
 
   private void displayData(int API_ID) {

@@ -186,6 +186,8 @@
     padding: 0 0 1 0;
     -fx-background-insets: 1;
 }
+.list-view .scroll-bar:vertical *.increment-button,
+.list-view .scroll-bar:vertical *.decrement-button,
 .list-view .scroll-bar:horizontal *.increment-button,
 .list-view .scroll-bar:horizontal *.decrement-button {
     -fx-background-color: null;
@@ -193,6 +195,8 @@
     -fx-background-insets: 0;
     -fx-padding: 0;
 }
+.list-view .scroll-bar:vertical *.increment-arrow,
+.list-view .scroll-bar:vertical *.decrement-arrow,
 .list-view .scroll-bar:horizontal *.increment-arrow,
 .list-view .scroll-bar:horizontal *.decrement-arrow {
     -fx-background-color: null;
