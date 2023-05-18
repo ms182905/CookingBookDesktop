@@ -2,25 +2,18 @@
 package pl.soltys.CookingBookApplication.controller;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import lombok.RequiredArgsConstructor;
@@ -32,23 +25,14 @@ import pl.soltys.CookingBookApplication.model.RecipeDBModel;
 import pl.soltys.CookingBookApplication.service.FavouriteRecipeService;
 
 @Controller
-@Component
 @RequiredArgsConstructor
 @FxmlView("FavouriteRecipeStage.fxml")
 @Slf4j
-public class FavouriteRecipeListController {
+public class FavouriteRecipeListController extends ListController {
   private final FxControllerAndView<RecipeDetailsController, VBox> recipeDetailsController;
-  private Stage stage;
-  @FXML private Pane pane_1;
+  private Stage mainStage;
+  @FXML private Pane mainPane;
   @FXML public Label recipeNameLabel = new Label();
-  @FXML public TableView<Recipe> mainTableView = new TableView<>();
-  @FXML public TableColumn<Recipe, ImageView> pictureTableColumn = new TableColumn<>("Picture");
-  @FXML public TableColumn<Recipe, String> nameTableColumn = new TableColumn<>("Name");
-
-  @FXML
-  public TableColumn<Recipe, String> descriptionTableColumn = new TableColumn<>("Description");
-
-  @FXML public ProgressIndicator progressIndicator;
 
   private final FavouriteRecipeService favouriteRecipeService;
 
@@ -64,22 +48,19 @@ public class FavouriteRecipeListController {
 
             recipeDetailsController
                 .getController()
-                .getStage()
-                .setOnCloseRequest(
-                    new EventHandler<WindowEvent>() {
-                      public void handle(WindowEvent we) {
-                        getRecipesFromDb();
-                      }
-                    });
+                .getMainStage()
+                .setOnCloseRequest(we -> getRecipesFromDb());
           }
         });
 
-    this.stage = new Stage();
-    stage.setScene(new Scene(pane_1));
+    mainStage = new Stage();
+    mainStage.getIcons().add(new Image("file:src/main/resources/icon.png"));
+    mainStage.setTitle("Favourite recipes");
+    mainStage.setScene(new Scene(mainPane));
   }
 
   public void show() {
-    stage.show();
+    mainStage.show();
     getRecipesFromDb();
   }
 
@@ -123,25 +104,5 @@ public class FavouriteRecipeListController {
     }
 
     return result;
-  }
-
-  public void setColumnForTableView(TableView<?> tableView) {
-    pictureTableColumn.setCellValueFactory((new PropertyValueFactory<>("Picture")));
-    nameTableColumn.setCellValueFactory((new PropertyValueFactory<>("Name")));
-    descriptionTableColumn.setCellValueFactory((new PropertyValueFactory<>("Description")));
-    tableView.setFixedCellSize(200);
-  }
-
-  public static void wrapTextForTableColumn(TableColumn<Recipe, String> tableColumn) {
-    tableColumn.setCellFactory(
-        tc -> {
-          TableCell<Recipe, String> cell = new TableCell<>();
-          Text text = new Text();
-          cell.setGraphic(text);
-          cell.setPrefHeight(Control.USE_COMPUTED_SIZE);
-          text.wrappingWidthProperty().bind(tableColumn.widthProperty());
-          text.textProperty().bind(cell.itemProperty());
-          return cell;
-        });
   }
 }

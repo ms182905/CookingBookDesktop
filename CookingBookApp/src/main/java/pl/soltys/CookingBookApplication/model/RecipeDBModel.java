@@ -20,11 +20,11 @@ public class RecipeDBModel {
   private Integer API_ID;
 
   @Column(name = "Name")
-  private String Name;
+  private String name;
 
   @Column(name = "Description")
-  private String Description;
+  private String description;
 
   @Column(name = "PictureURL")
-  private String PictureURL;
+  private String pictureURL;
 }

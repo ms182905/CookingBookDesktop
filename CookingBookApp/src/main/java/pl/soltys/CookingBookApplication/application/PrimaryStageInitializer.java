@@ -2,6 +2,7 @@
 package pl.soltys.CookingBookApplication.application;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ public class PrimaryStageInitializer implements ApplicationListener<StageReadyEv
     Scene scene = new Scene(fxWeaver.loadView(RecipeListController.class));
     stage.setScene(scene);
     stage.setResizable(false);
-    stage.setTitle("CookingBookApplication");
+    stage.getIcons().add(new Image("file:src/main/resources/icon.png"));
+    stage.setTitle("CookingBook Now!");
     stage.show();
   }
 }

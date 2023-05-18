@@ -11,15 +11,15 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Recipe {
   private int API_ID;
-  private String Name;
-  private String Description;
-  private ImageView Picture;
+  private String name;
+  private String description;
+  private ImageView picture;
 
   public Recipe(RecipeDBModel pattern) {
     this.API_ID = pattern.getAPI_ID();
-    this.Description = pattern.getDescription();
-    this.Name = pattern.getName();
-    this.Picture = getImageViewFromUrl(pattern.getPictureURL());
+    this.description = pattern.getDescription();
+    this.name = pattern.getName();
+    this.picture = getImageViewFromUrl(pattern.getPictureURL());
   }
 
   private ImageView getImageViewFromUrl(String url) {

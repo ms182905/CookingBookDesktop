@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane_1" prefHeight="657.0" prefWidth="910.0" stylesheets="@../../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.soltys.CookingBookApplication.controller.FavouriteRecipeListController">
+<Pane fx:id="mainPane" prefHeight="657.0" prefWidth="910.0" stylesheets="@../../../../assets/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.soltys.CookingBookApplication.controller.FavouriteRecipeListController">
    <children>
       <AnchorPane prefHeight="657.0" prefWidth="910.0">
          <children>

@@ -4,14 +4,15 @@ package pl.soltys.CookingBookApplication.controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import lombok.RequiredArgsConstructor;
@@ -23,14 +24,13 @@ import pl.soltys.CookingBookApplication.service.FavouriteRecipeService;
 import pl.soltys.CookingBookApplication.service.RecipeDetailsService;
 
 @Controller
-@Component
 @RequiredArgsConstructor
 @Slf4j
 @FxmlView("RecipeDetailsStage.fxml")
 public class RecipeDetailsController {
-  private Stage stage;
+  private Stage mainStage;
 
-  @FXML private Pane pane_1;
+  @FXML private Pane mainPane;
   @FXML private Label recipeTitleLabel;
   @FXML private ImageView recipePhoto;
   @FXML private ListView<String> recipeIngredients;
@@ -46,8 +46,10 @@ public class RecipeDetailsController {
     setCellFactoryForListView(recipeIngredients);
     setCellFactoryForListView(recipeSteps);
 
-    this.stage = new Stage();
-    stage.setScene(new Scene(pane_1));
+    mainStage = new Stage();
+    mainStage.getIcons().add(new Image("file:src/main/resources/icon.png"));
+    mainStage.setTitle("Recipe details");
+    mainStage.setScene(new Scene(mainPane));
     recipePhoto.setSmooth(true);
     recipePhoto.setCache(true);
     recipePhoto.setPreserveRatio(true);
@@ -58,7 +60,7 @@ public class RecipeDetailsController {
         favouriteRecipeService.contains(API_ID) ? "Remove from favourites" : "Add to favourites");
 
     displayData(API_ID);
-    stage.show();
+    mainStage.show();
   }
 
   private void displayData(int API_ID) {
@@ -107,7 +109,7 @@ public class RecipeDetailsController {
   }
 
   @FXML
-  public void addToFavourites() { // name refactor
+  public void manageFavouriteRecipe() {
     if (favouriteRecipeService.contains(recipeDetails.getAPI_ID())) {
       log.info(
           "Removing from repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
@@ -116,30 +118,17 @@ public class RecipeDetailsController {
     } else {
       log.info(
           "Adding to repository: " + recipeDetails.getAPI_ID() + " " + recipeDetails.getName());
-      var recipeDBModel =
+      favouriteRecipeService.add(
           new RecipeDBModel(
               recipeDetails.getAPI_ID(),
               recipeDetails.getName(),
               recipeDetails.getDescription(),
-              recipeDetails.getPictureURL());
-      favouriteRecipeService.add(recipeDBModel);
+              recipeDetails.getPictureURL()));
       addToFavouritesButton.setText("Remove from favourites");
     }
   }
 
-  public static void wrapTextForListView(ListView<String> listView) {
-    listView.setCellFactory(
-        tc -> {
-          ListCell<String> cell = new ListCell<>();
-          Text text = new Text();
-          cell.setGraphic(text);
-          text.wrappingWidthProperty().bind(listView.widthProperty());
-          text.textProperty().bind(cell.itemProperty());
-          return cell;
-        });
-  }
-
-  public Stage getStage() {
-    return this.stage;
+  public Stage getMainStage() {
+    return this.mainStage;
   }
 }

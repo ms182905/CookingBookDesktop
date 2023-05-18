@@ -35,12 +35,12 @@ public class RecipeDetailsService {
 
   private RecipeDetails parseJson(JSONObject recipe) {
     return RecipeDetails.builder()
-        .Name(recipe.getString("name"))
+        .name(recipe.getString("name"))
         .API_ID(recipe.getInt("id"))
-        .Description(getDescriptionFromJSON(recipe))
-        .PictureURL(recipe.getString("thumbnail_url"))
-        .Ingredients(getIngredientsFromJSON(recipe))
-        .Instructions(getInstructionsFromJSONObject(recipe))
+        .description(getDescriptionFromJSON(recipe))
+        .pictureURL(recipe.getString("thumbnail_url"))
+        .ingredients(getIngredientsFromJSON(recipe))
+        .instructions(getInstructionsFromJSONObject(recipe))
         .build();
   }
 

@@ -66,13 +66,11 @@ public class RecipeListService {
   }
 
   private Recipe parseJson(JSONObject recipe) {
-    System.out.println(recipe.getString("name") + " " + recipe.getInt("id"));
-    System.out.println(getDescriptionFromJSON(recipe).length());
     return Recipe.builder()
-        .Name(recipe.getString("name"))
+        .name(recipe.getString("name"))
         .API_ID(recipe.getInt("id"))
-        .Description(getDescriptionFromJSON(recipe))
-        .Picture(getImageViewFromUrl(recipe.getString("thumbnail_url")))
+        .description(getDescriptionFromJSON(recipe))
+        .picture(getImageViewFromUrl(recipe.getString("thumbnail_url")))
         .build();
   }
 
